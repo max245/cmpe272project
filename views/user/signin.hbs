@@ -1,0 +1,32 @@
+<h1>Dripped out Project</h1>
+<div class="text-center">
+    <br>
+    <br>
+    <h1 class="h3 mb-3 font-weight-normal">Sign In</h1><br>
+    {{#if hasErrors}}
+        <div class="alert alert-danger">
+            {{# each messages}}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+    {{/if}}
+    <br>
+    <form class="form-signin" action="/user/signin" method="post">
+        <div class="form-group">
+            <label for="email" class="sr-only">Email address</label>
+            <input type="text" id="email" class="form-control" name="email" placeholder="Email Address" required autofocus>
+        </div>
+        <div class="form-group">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+        <button class="submit" class="btn btn-lg btn-primary btn-block">Sign In</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+    </form>
+</div>

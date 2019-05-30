@@ -1,0 +1,41 @@
+{{# if listings}}
+    <br>
+    <div class="container">
+        <ul class="list-group">
+            {{# each listings }}
+                <li class="class list-group-item">
+                    <span class="badge">{{ this.qty }}</span>
+                    <strong>{{ this.item.name }}</strong>
+                    <div class="btn-group">
+                        <button class="nav-link btn btn-primary btn-xs dropdown-toggle" type="button" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Manage Item <span class="caret"></span></button>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">...</a></li>
+                            <li><a class="dropdown-item" href="#">...</a></li>
+                        </ul>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+    <br>
+    <div class="container"></div>
+    <br>
+    <div class="container">
+        {{# if login}}
+        <a href="/checkout" type="button" class="btn btn-success">Continue with Reservation</a>
+        {{else}}
+        <p>Please Login or Sign-up to make a Reservation.</p>
+        {{/if}}
+    </div>
+    <br>
+{{ else }}
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <h2>No Items in Wishlist</h2>
+        <br>
+    </div>
+{{/if}}
+<br>
+<br>

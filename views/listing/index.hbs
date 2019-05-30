@@ -1,0 +1,48 @@
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+
+{{# each listings}}
+  <div class="container-fluid">
+    <div class="row">
+      {{# each this}}
+      <div class="col">
+        <div class="card" style="width: 20rem;">
+            <img src="{{ this.picture_url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ this.name }}</h5>
+              <p class="price">{{ this.price }}<small class="text-muted"> per night</small></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Location: </strong>{{ this.smart_location }}</li>
+              <li class="list-group-item"><strong>Bedrooms: </strong>{{ this.bedrooms }}</li>
+              <li class="list-group-item"><strong>Type: </strong>{{ this.property_type }}</li>
+              <li class="list-group-item"><strong>Rating: </strong>{{ this.review_scores_rating}}</li>
+            </ul>
+            <div class="card-body">
+              <a href="/add-to-wishlist/{{this.id}}" class="btn btn-primary">Add to Wishlist</a>
+              <a href="#" class="btn btn-success">Reserve</a>
+            </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <br>
+  </div>
+{{/each}}
+<br>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+    <li class="page-item "><a class="page-link" href="#">2</a></li>
+    <li class="page-item "><a class="page-link" href="#">3</a></li>
+    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+    <li class="page-item "><a class="page-link" href="#">1270</a></li>
+    <li class="page-item "><a class="page-link" href="#">1271</a></li>
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
