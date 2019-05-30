@@ -1,0 +1,16 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+    - image: alpine:3.7
+    steps:
+    - run:
+        name: The First Step
+        command: |
+          echo 'Hello class!'
+          echo 'This is TB1 group Project'
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
