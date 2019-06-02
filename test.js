@@ -2,31 +2,32 @@
 process.env.NODE_ENV = 'test';
 
 let mongoose = require("mongoose");
-let Book = require('../app/models/book');
+let Listing = require('../app/models/listing');
 
 //Require the dev-dependencies
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../server');
 let should = chai.should();
+mongoose.connect('mongodb+srv://cajuluokeke:Onyeabacha1%24@test-cluster-qau7u.mongodb.net/test1?retryWrites=true' , { useNewUrlParser: true });
 
 
 chai.use(chaiHttp);
 
 //Our parent block
-describe('Books', () => {
+describe('Listings', () => {
 	beforeEach((done) => { //Before each test we empty the database
-		Book.remove({}, (err) => { 
+		Listing.remove({}, (err) => { 
 		   done();		   
 		});		
 	});
  /*
   * Test the /GET route
   */
-  describe('/GET book', () => {
-	  it('it should GET all the books', (done) => {
+  describe('/GET listing', () => {
+	  it('it should GET all the listings', (done) => {
 			chai.request(server)
-		    .get('/book')
+		    .get('/listing')
 		    .end((err, res) => {
 			  	res.should.have.status(200);
 			  	res.body.should.be.a('array');
@@ -38,16 +39,19 @@ describe('Books', () => {
  /*
   * Test the /POST route
   */
-  describe('/POST book', () => {
-	  it('it should not POST a book without pages field', (done) => {
-	  	let book = {
-	  		title: "The Lord of the Rings",
-	  		author: "J.R.R. Tolkien",
-	  		year: 1954
+  describe('/POST listing', () => {
+	  it('it should not POST a listing without pages field', (done) => {
+	  	let listing = {
+	  		title: "Garden Views",
+	  		price: "43",
+	  		bedrooms: 1,
+			type: "Apartment",
+			review_scores_rating: 81,
+			smart_location: "Brighton East, Australia"
 	  	}
 			chai.request(server)
-		    .post('/book')
-		    .send(book)
+		    .post('/listing')
+		    .send(listing)
 		    .end((err, res) => {
 			  	res.should.have.status(200);
 			  	res.body.should.be.a('object');
@@ -57,24 +61,28 @@ describe('Books', () => {
 		      done();
 		    });
 	  });
-	  it('it should POST a book ', (done) => {
-	  	let book = {
-	  		title: "The Lord of the Rings",
-	  		author: "J.R.R. Tolkien",
-	  		year: 1954,
-	  		pages: 1170
+	  it('it should POST a listing ', (done) => {
+	  	let listing = {
+	  		title: "Garden Views",
+	  		price: "43",
+	  		bedrooms: 1,
+			type: "Apartment",
+			review_scores_rating: 81,
+			smart_location: "Brighton East, Australia"
 	  	}
 			chai.request(server)
-		    .post('/book')
-		    .send(book)
+		    .post('/listing')
+		    .send(listing)
 		    .end((err, res) => {
 			  	res.should.have.status(200);
 			  	res.body.should.be.a('object');
-			  	res.body.should.have.property('message').eql('Book successfully added!');
+			  	res.body.should.have.property('message').eql('Listing successfully added!');
 			  	res.body.book.should.have.property('title');
-			  	res.body.book.should.have.property('author');
-			  	res.body.book.should.have.property('pages');
-			  	res.body.book.should.have.property('year');
+			  	res.body.book.should.have.property('price');
+			  	res.body.book.should.have.property('bedrooms');
+			  	res.body.book.should.have.property('type');
+				res.body.book.should.have.property('review_scores_rating');
+				res.body.book.should.have.property('smart_location');
 		      done();
 		    });
 	  });
