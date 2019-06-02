@@ -10,7 +10,7 @@ jobs:
         command: |
           echo 'Hello class!'
           echo 'This is TB1 group'
-test:
+test: npm start
 
 workflows:
   version: 2
