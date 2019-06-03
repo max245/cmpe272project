@@ -77,12 +77,12 @@ describe('Listings', () => {
 			  	res.should.have.status(200);
 			  	res.body.should.be.a('object');
 			  	res.body.should.have.property('message').eql('Listing successfully added!');
-			  	res.body.book.should.have.property('title');
-			  	res.body.book.should.have.property('price');
-			  	res.body.book.should.have.property('bedrooms');
-			  	res.body.book.should.have.property('type');
-				res.body.book.should.have.property('review_scores_rating');
-				res.body.book.should.have.property('smart_location');
+			  	res.body.listing.should.have.property('title');
+			  	res.body.listing.should.have.property('price');
+			  	res.body.listing.should.have.property('bedrooms');
+			  	res.body.listing.should.have.property('type');
+				res.body.listing.should.have.property('review_scores_rating');
+				res.body.listing.should.have.property('smart_location');
 		      done();
 		    });
 	  });
@@ -90,13 +90,13 @@ describe('Listings', () => {
  /*
   * Test the /GET/:id route
   */
-  describe('/GET/:id book', () => {
-	  it('it should GET a book by the given id', (done) => {
-	  	let book = new Book({ title: "The Lord of the Rings", author: "J.R.R. Tolkien", year: 1954, pages: 1170 });
-	  	book.save((err, book) => {
+  describe('/GET/:id listing', () => {
+	  it('it should GET a listing by the given id', (done) => {
+	  	let listing = new Listing({ title: "Garden Views", price: "43", bedrooms: 1, type: "Apartment", review_scores_rating: 81, smart_location: "Brighton East, Australia" });
+	  	listing.save((err, listing) => {
 	  		chai.request(server)
-		    .get('/book/' + book.id)
-		    .send(book)
+		    .get('/listing/' + listing.id)
+		    .send(listing)
 		    .end((err, res) => {
 			  	res.should.have.status(200);
 			  	res.body.should.be.a('object');
@@ -104,7 +104,7 @@ describe('Listings', () => {
 			  	res.body.should.have.property('author');
 			  	res.body.should.have.property('pages');
 			  	res.body.should.have.property('year');
-			  	res.body.should.have.property('_id').eql(book.id);
+			  	res.body.should.have.property('_id').eql(listing.id);
 		      done();
 		    });
 	  	});
@@ -114,18 +114,18 @@ describe('Listings', () => {
  /*
   * Test the /PUT/:id route
   */
-  describe('/PUT/:id book', () => {
-	  it('it should UPDATE a book given the id', (done) => {
-	  	let book = new Book({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1948, pages: 778})
-	  	book.save((err, book) => {
+  describe('/PUT/:id listing', () => {
+	  it('it should UPDATE a listing given the id', (done) => {
+	  	let listing = new Listing({title: "Garden Views", price: "43", bedrooms: 1, type: "Apartment", review_scores_rating: 81, smart_location: "Brighton East, Australia"})
+	  	listing.save((err, listing) => {
 				chai.request(server)
-			    .put('/book/' + book.id)
-			    .send({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1950, pages: 778})
+			    .put('/listing/' + listing.id)
+			    .send({title: "Garden Views", price: "43", bedrooms: 1, type: "Apartment", review_scores_rating: 81, smart_location: "Brighton East, Australia"})
 			    .end((err, res) => {
 				  	res.should.have.status(200);
 				  	res.body.should.be.a('object');
-				  	res.body.should.have.property('message').eql('Book updated!');
-				  	res.body.book.should.have.property('year').eql(1950);
+				  	res.body.should.have.property('message').eql('Listing updated!');
+				  	res.body.listing.should.have.property('year').eql(1950);
 			      done();
 			    });
 		  });
@@ -134,16 +134,16 @@ describe('Listings', () => {
  /*
   * Test the /DELETE/:id route
   */
-  describe('/DELETE/:id book', () => {
-	  it('it should DELETE a book given the id', (done) => {
-	  	let book = new Book({title: "The Chronicles of Narnia", author: "C.S. Lewis", year: 1948, pages: 778})
-	  	book.save((err, book) => {
+  describe('/DELETE/:id Listing', () => {
+	  it('it should DELETE a listing given the id', (done) => {
+	  	let listing = new Listing({title: "Garden Views", price: "43", bedrooms: 1, type: "Apartment", review_scores_rating: 81, smart_location: "Brighton East, Australia"})
+	  	listing.save((err, listing) => {
 				chai.request(server)
-			    .delete('/book/' + book.id)
+			    .delete('/listing/' + listing.id)
 			    .end((err, res) => {
 				  	res.should.have.status(200);
 				  	res.body.should.be.a('object');
-				  	res.body.should.have.property('message').eql('Book successfully deleted!');
+				  	res.body.should.have.property('message').eql('Listing successfully deleted!');
 				  	res.body.result.should.have.property('ok').eql(1);
 				  	res.body.result.should.have.property('n').eql(1);
 			      done();
