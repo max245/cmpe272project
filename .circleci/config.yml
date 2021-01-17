@@ -1,3 +1,4 @@
+
 version: 2.0
 jobs:
   build:
@@ -8,7 +9,7 @@ jobs:
         name: The First Step
         command: |
           echo 'Hello class!'
-          echo 'This is TB1 group Project'
+
 workflows:
   version: 2
   workflow:
